@@ -47,7 +47,7 @@ public class loginTest extends BaseClass {
 
 	}
 
-	@Test(priority = 2, dataProviderClass = ReadExcelData.class, dataProvider = "readDataValues")
+	@Test(priority = 2, dataProviderClass = ReadExcelData.class, dataProvider = "readCustomerDataValues")
 	public void loginFunctionTestTwo(String Uname, String Pass, String Fname, String Lname, String Add1, String Zip) {
 		String actual = homePage.login(Uname, Pass);
 		if (actual.contains("Welcome")) {
@@ -59,6 +59,13 @@ public class loginTest extends BaseClass {
 			System.out.println("Login Failed ");
 			Assert.assertTrue(false);
 		}
+	}
+
+	@Test(priority = 3, dataProviderClass = ReadExcelData.class, dataProvider = "readDemoData")
+	public void sampleDataDemoTest(String fName,String lName) {
+		
+		System.out.println("Test Demo Data ----> "+fName+" "+lName);
+		Assert.assertTrue(true);
 	}
 
 	@AfterMethod
