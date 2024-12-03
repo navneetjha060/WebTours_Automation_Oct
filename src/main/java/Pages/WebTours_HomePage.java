@@ -31,6 +31,9 @@ public class WebTours_HomePage extends BaseClass {
 	@FindBy(xpath = "//a[normalize-space()='sign up now']")
 	private WebElement signUpNow;
 
+	@FindBy(xpath = "//img[@alt='Search Flights Button']")
+	private WebElement flightsBtn;
+
 	// Define Constructor
 
 	public WebTours_HomePage() {
@@ -75,6 +78,14 @@ public class WebTours_HomePage extends BaseClass {
 		fs.switchFrameName("info");
 		signUpNow.click();
 		return new customerProfilePage();
+	}
+
+	public FlightsPage clickFlightsBtn() {
+		
+		fs.switchParentFrame();
+		fs.switchFrameName("navbar");
+		flightsBtn.click();
+		return new FlightsPage();
 	}
 
 }
