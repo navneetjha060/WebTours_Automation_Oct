@@ -37,7 +37,25 @@ public class BookFlightsTest extends BaseClass {
 		String actual = bookFlight.validateBaner();
 		String expected = "Find Flight";
 		Assert.assertEquals(actual, expected);
+		
 	}
+	
+	@Test()
+	public void findFlightTest() throws InterruptedException {
+		bookFlight.enterFlightDetails();
+		String Actual =bookFlight.clickContinue();
+		String Expectecd ="Flight departing from Los Angeles to Paris on 05/12/2024"; 
+		Assert.assertEquals(Actual, Expectecd);
+	}
+	
+	
+	@Test()
+	public void findFlightTest2() throws InterruptedException {
+		bookFlight.enterFlightDetails();
+		bookFlight.clickContinue();
+		bookFlight.selectFlightNumber();
+	}
+	
 
 	@AfterMethod
 	public void tearDown() {
