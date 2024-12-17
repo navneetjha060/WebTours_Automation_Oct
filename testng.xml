@@ -8,6 +8,7 @@
     <classes>
       <class name="TestCases.loginTest"/>
       <class name="TestCases.createCustomerProfileTest"/>
+      <class name="TestCases.BookFlightsTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

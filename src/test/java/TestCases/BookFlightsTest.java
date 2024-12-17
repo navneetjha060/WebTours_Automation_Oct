@@ -31,7 +31,7 @@ public class BookFlightsTest extends BaseClass {
 
 	}
 
-	@Test()
+	@Test(priority = 1)
 	public void testValidatePageBaner() {
 
 		String actual = bookFlight.validateBaner();
@@ -40,7 +40,7 @@ public class BookFlightsTest extends BaseClass {
 		
 	}
 	
-	@Test()
+	@Test(priority = 2)
 	public void findFlightTest() throws InterruptedException {
 		bookFlight.enterFlightDetails();
 		String Actual =bookFlight.clickContinue();
@@ -49,7 +49,7 @@ public class BookFlightsTest extends BaseClass {
 	}
 	
 	
-	@Test()
+	@Test(priority = 3)
 	public void findFlightTest2() throws InterruptedException {
 		bookFlight.enterFlightDetails();
 		bookFlight.clickContinue();
