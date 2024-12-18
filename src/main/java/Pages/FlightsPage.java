@@ -57,12 +57,15 @@ public class FlightsPage extends BaseClass {
 
 	@FindBy(xpath = "//input[@name='returnDate']")
 	private WebElement returnDate;
-	
+
 	@FindBy(xpath = "(//blockquote)[2]")
 	private WebElement fligtQuoteMessage;
-	
+
 	@FindBy(xpath = "(//input[@name='outboundFlight'])[1]")
 	private WebElement flightNumber1;
+
+	@FindBy(xpath = "//input[@name='reserveFlights']")
+	private WebElement continueBtn2;
 
 	// Define Constructor
 
@@ -73,47 +76,67 @@ public class FlightsPage extends BaseClass {
 
 	// Define Methods
 
-	// Validate Baner
+	// Validate Banner
 	public String validateBaner() {
 		fs.switchParentFrame();
 		fs.switchFrameName("info");
 		return findFlightBaner.getText();
 	}
 
-	
 	// Populate Flight Details
-	public void enterFlightDetails() throws InterruptedException {
+	public void enterFlightDetails(String depCity, String arrCity, String passCount, String seatPref , String seatClass)
+			throws InterruptedException {
 		fs.switchParentFrame();
 		fs.switchFrameName("info");
 
 		Select selectDepart = new Select(departCity);
-		selectDepart.selectByValue("Los Angeles");
-		//Thread.sleep(3000);
+		selectDepart.selectByValue(depCity);
 
 		Select selectArrive = new Select(arrivalCity);
-		selectArrive.selectByValue("Paris");
-		//Thread.sleep(3000);
+		selectArrive.selectByValue(arrCity);
 
 		passengerCount.clear();
-		passengerCount.sendKeys("1");
-		//Thread.sleep(3000);
+		passengerCount.sendKeys(passCount);
 
-		windowSeat.click();
-		//Thread.sleep(3000);
-
-		businessClassSeat.click();
-		//Thread.sleep(3000);
-
-		//roundTripCheck.click();
-		//Thread.sleep(3000);
 		
+		//Selecting Seat Preference
+		if (seatPref.equalsIgnoreCase("Window")) {
+			windowSeat.click();
+		}
+
+		else if (seatPref.equalsIgnoreCase("Aisle")) {
+			aisleSeat.click();
+		}
+
+		else {
+			noneSeat.click();
+		}
+		
+		
+		//Selecting Seat Class
+		if (seatClass.equalsIgnoreCase("First")) {
+			firstClassSeat.click();
+		}
+		
+		else if (seatClass.equalsIgnoreCase("Business")) {
+			businessClassSeat.click();
+		}
+		
+		else {
+			coachSeat.click();
+		}
+
+		
+		// roundTripCheck.click();
+		// Thread.sleep(3000);
+
 		departDate.clear();
 		departDate.sendKeys("05/12/2024");
-		//Thread.sleep(3000);
-		
+		// Thread.sleep(3000);
+
 		returnDate.clear();
 		returnDate.sendKeys("10/12/2024");
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 
 	}
 
@@ -122,16 +145,24 @@ public class FlightsPage extends BaseClass {
 		fs.switchParentFrame();
 		fs.switchFrameName("info");
 		continueBtn.click();
-		//Thread.sleep(3000);
+		// Thread.sleep(3000);
 		return fligtQuoteMessage.getText();
-		
+
 	}
-	
+
 	public void selectFlightNumber() throws InterruptedException {
 		fs.switchParentFrame();
 		fs.switchFrameName("info");
 		flightNumber1.click();
-		//Thread.sleep(3000);
+		// Thread.sleep(3000);
+	}
+
+	public paymentPage clickContinueBtn2() {
+		fs.switchParentFrame();
+		fs.switchFrameName("info");
+		continueBtn2.click();
+		return new paymentPage();
+
 	}
 
 }
