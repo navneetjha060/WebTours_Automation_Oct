@@ -59,6 +59,16 @@ public class BookFlightsTest extends BaseClass {
 		Assert.assertTrue(payPage.validatePaymentPageBaner());
 		Thread.sleep(2000);
 	}
+	
+	@Test(priority = 4)
+	public void bookFlightTest() throws InterruptedException {
+		bookFlight.enterFlightDetails("Los Angeles","Paris","1","Aisle","First");
+		bookFlight.clickContinue();
+		bookFlight.selectFlightNumber();
+		payPage = bookFlight.clickContinueBtn2();
+		Assert.assertTrue(payPage.validatePaymentPageBaner());
+		payPage.enterPaymentDetails();
+	}
 
 	@AfterMethod
 	public void tearDown() {
