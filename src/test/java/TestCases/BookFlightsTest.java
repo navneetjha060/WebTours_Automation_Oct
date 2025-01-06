@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import BaseClass.BaseClass;
 import Pages.FlightsPage;
+import Pages.InvoicePage;
 import Pages.WebTours_HomePage;
 import Pages.paymentPage;
 
@@ -18,6 +19,7 @@ public class BookFlightsTest extends BaseClass {
 	WebTours_HomePage homePage;
 	FlightsPage bookFlight;
 	paymentPage payPage;
+	InvoicePage invoice;
 
 	// Constructor
 	public BookFlightsTest() {
@@ -44,7 +46,7 @@ public class BookFlightsTest extends BaseClass {
 
 	@Test(priority = 2)
 	public void findFlightTest() throws InterruptedException {
-		bookFlight.enterFlightDetails("Los Angeles","Paris","1","Window","Coach");
+		bookFlight.enterFlightDetails("Los Angeles", "Paris", "1", "Window", "Coach");
 		String Actual = bookFlight.clickContinue();
 		String Expectecd = "Flight departing from Los Angeles to Paris on 05/12/2024";
 		Assert.assertEquals(Actual, Expectecd);
@@ -52,22 +54,27 @@ public class BookFlightsTest extends BaseClass {
 
 	@Test(priority = 3)
 	public void findFlightSelectFlightTest() throws InterruptedException {
-		bookFlight.enterFlightDetails("Los Angeles","Paris","1","Aisle","First");
+		bookFlight.enterFlightDetails("Los Angeles", "Paris", "1", "Aisle", "First");
 		bookFlight.clickContinue();
 		bookFlight.selectFlightNumber();
 		payPage = bookFlight.clickContinueBtn2();
 		Assert.assertTrue(payPage.validatePaymentPageBaner());
 		Thread.sleep(2000);
 	}
-	
+
 	@Test(priority = 4)
-	public void bookFlightTest() throws InterruptedException {
-		bookFlight.enterFlightDetails("Los Angeles","Paris","1","Aisle","First");
+	public void E2EbookFlightTest() throws InterruptedException {
+		bookFlight.enterFlightDetails("Los Angeles", "Paris", "1", "Aisle", "First");
 		bookFlight.clickContinue();
 		bookFlight.selectFlightNumber();
 		payPage = bookFlight.clickContinueBtn2();
 		Assert.assertTrue(payPage.validatePaymentPageBaner());
-		payPage.enterPaymentDetails();
+		invoice = payPage.enterPaymentDetails();
+		Assert.assertTrue(invoice.validateInvoiceBaner());
+		String Expected = "Thank you for booking through Web Tours.";
+		String Actual = invoice.validateThanksMessage();
+		Assert.assertEquals(Actual, Expected);
+
 	}
 
 	@AfterMethod
