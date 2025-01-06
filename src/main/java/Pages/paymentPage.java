@@ -61,7 +61,7 @@ public class paymentPage extends BaseClass {
 	}
 	
 	// Enter Payment Details
-	public void enterPaymentDetails() throws InterruptedException {
+	public InvoicePage enterPaymentDetails() throws InterruptedException {
 		fs.switchParentFrame();
 		fs.switchFrameName("info");
 		streetAddress.sendKeys("Wakad");
@@ -71,6 +71,7 @@ public class paymentPage extends BaseClass {
 		save.click();
 		contBtn.click();
 		Thread.sleep(2000);
+		return new InvoicePage();
 		
 	}
 
