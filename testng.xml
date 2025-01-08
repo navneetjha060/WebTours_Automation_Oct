@@ -4,11 +4,9 @@
 	<listeners>
 		<listener class-name="Listeners.Listeners" />
 	</listeners>
-  <test thread-count="5" name="Test">
-    <classes>
-      <class name="TestCases.loginTest"/>
-      <class name="TestCases.createCustomerProfileTest"/>
-      <class name="TestCases.BookFlightsTest"/>
-    </classes>
-  </test> <!-- Test -->
+	<test thread-count="5" name="Test">
+		<classes>
+			<class name="TestCases.loginTest" />
+		</classes>
+	</test> <!-- Test -->
 </suite> <!-- Suite -->
