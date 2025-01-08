@@ -39,7 +39,7 @@ public class createCustomerProfileTest extends BaseClass {
 
 	}
 
-	@Test(priority = 2, dataProviderClass = ReadExcelData.class, dataProvider = "readCustomerDataValues")
+	@Test(priority = 2, dataProviderClass = ReadExcelData.class, dataProvider = "readCustomerDataValues",retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void createCustomerTest(String Uname, String Pass, String Fname, String Lname,String Add1, String Zip)
 			throws InterruptedException {
 		cp = homePage.clickSignUp();
