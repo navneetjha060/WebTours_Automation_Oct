@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.Properties;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BaseClass {
 
@@ -20,9 +21,21 @@ public class BaseClass {
 		FileInputStream input = new FileInputStream(Path + "\\src\\main\\java\\Properties\\config.properties");
 		prop.load(input);
 
-		// Launch Application
-		driver = new ChromeDriver();
+		// Headless Mode
+		if (prop.getProperty("mode").equalsIgnoreCase("Headless")) {
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
 
+			// Launch Browser in Headless Mode
+			driver = new ChromeDriver(options);
+		}
+
+		else {
+			// Launch Browser in Normal Mode
+			driver = new ChromeDriver();
+		}
+		
+		// Launch Application
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.get(prop.getProperty("url"));

@@ -31,7 +31,7 @@ public class loginTest extends BaseClass {
 	}
 
 	// Provide Test Cases
-	@Test(priority = 1)
+	@Test(priority = 1,retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void loginFunctionTest() {
 
 		String actual = homePage.login("jojo", "bean");
