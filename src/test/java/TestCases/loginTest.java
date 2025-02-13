@@ -8,6 +8,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import BaseClass.BaseClass;
 import Pages.WebTours_HomePage;
@@ -22,6 +24,9 @@ public class loginTest extends BaseClass {
 	public loginTest() {
 		super();
 	}
+	
+	// Log Reference
+	private static final Logger logger = LogManager.getLogger(loginTest.class);
 
 	@BeforeMethod
 	public void steup() throws IOException {
@@ -38,11 +43,13 @@ public class loginTest extends BaseClass {
 		if (actual.contains("Welcome")) {
 			System.out.println("Login Successful ");
 			Assert.assertTrue(true);
+			logger.info("Logs----- Login successful!");
 		}
 
 		else if (actual.contains("Web Tours Error")) {
 			System.out.println("Login Failed ");
 			Assert.assertTrue(false);
+			logger.error("Logs------❌ Login failed!");
 		}
 
 	}
