@@ -11,25 +11,31 @@ import com.aventstack.extentreports.ExtentTest;
 
 import Utilities.ExtentReportUtility;
 import Utilities.captureScreenShot;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Listeners implements ITestListener {
 
 	ExtentReports extent = ExtentReportUtility.extentReportsUtil();
 	ExtentTest test;
+	static Logger Log = LogManager.getLogger(Listeners.class);
 
 	public void onTestStart(ITestResult result) {
 		System.out.println("------------Test Started------------" + result.getName());
 		test = extent.createTest(result.getName());
+		Log.info("Logs-----Test Started------------" + result.getName());
 	}
 
 	public void onTestSuccess(ITestResult result) {
 		System.out.println("--------Test Passed Successfully---------" + result.getName());
 		test.pass("Test Passed Successfully");
+		Log.info("Logs-----Test Passed Successfully------------" + result.getName());
 	}
 
 	public void onTestFailure(ITestResult result) {
 		System.out.println("--------!!!!! Test Failed !!!!!!--------" + result.getName());
 		test.fail("Test Failed");
+		Log.error("Log-------❌ Login failed!"+ result.getName());
 		captureScreenShot SS = new captureScreenShot();
 		try {
 			SS.captureSS(result.getName());
